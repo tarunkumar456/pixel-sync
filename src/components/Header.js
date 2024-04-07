@@ -25,6 +25,7 @@ const Header = ({ handleDarkMode }) => {
 
     <div>
       <div className=' bg-gray-400 h-[20dvh]  flex pt-8 items-center pl-10'>
+        <div ><img src={google} alt="img" className=' w-20 mr-4'/> </div>
         <div className='w-[80%] items-center rounded-xl bg-gray-200'>
           <div className='flex px-5 py-2 h-full w-full bg-brown-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-2xl bg-opacity-60 border border-gray-100 items-center  justify-between '>
             <div className='flex items-center gap-2 w-full pr-5 '>
