@@ -7,7 +7,8 @@ const Header = ({ handleDarkMode }) => {
   const query = "hello";
   const [username, setUsername] = useState('');
   const [data, setData] = useState([]);
-  const Search = async () => {
+  const [show, setShow] = useState(0);
+  const Search1 = async () => {
     try {
       const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyAfp5jCnmuLZZNRDkG7V7CjKcSaaXSN13E&cx=a1af7bb50039b45a6&q=${username}`);
       if (response) {
@@ -20,7 +21,27 @@ const Header = ({ handleDarkMode }) => {
       console.error(error);
     }
   }
-
+  const Search2 = async () => {
+    try {
+      const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyAfp5jCnmuLZZNRDkG7V7CjKcSaaXSN13E&cx=a1af7bb50039b45a6&searchType=image&q=${username}`);
+      if (response) {
+        console.log(response.data.items)
+        setData(response.data.items)
+        // setSearchResults(response.data.items);
+        // setSearchInfo(response.data.searchInformation);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  const All = () => {
+    setShow(0);
+    Search1();
+  }
+  const Image1 = () => {
+    setShow(1);
+    Search2();
+  }
   return (
 
     <div>
@@ -32,7 +53,7 @@ const Header = ({ handleDarkMode }) => {
               <FiSearch />
               <input value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder='Search Us or type a URL...' className='bg-transparent outline-none w-full' />
             </div>
-            <button onClick={Search} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Search</button>
+            <button onClick={Search1} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Search</button>
           </div>
         </div>
         <button onClick={() => handleDarkMode(
@@ -40,15 +61,37 @@ const Header = ({ handleDarkMode }) => {
         )}
           className="save">Toggle</button>
       </div>
-      <div className='  flex flex-col justify-start items-start'>
-        {
-         data.map((i)=>{
-          return (
-            <Links title={i.title} link={i.link} display={i.displayLink} val={i.snippet} img={i.pagemap}/>
-          )
-         }) 
-        }
+      <div className='flex p-3'>
+        <button onClick={All} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">All</button>
+        <button onClick={Image1} className="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Image</button>
       </div>
+      {
+        !show &&
+        <div className='  flex flex-col justify-start items-start'>
+          {
+            data.map((i) => {
+              return (
+                <Links title={i.title} link={i.link} display={i.displayLink} val={i.snippet} img={i.pagemap} />
+              )
+            })
+          }
+        </div>
+      }
+      {
+        show &&
+        <div className='  flex flex-wrap justify-evenly '>
+          {
+            data.map((i) => {
+              return (
+                <div>
+                  <img className='w-[20vw] h-[20vw] border-slate-900 border-2 m-2' src={i.link}></img>
+                  <a href={i.displayLink} target='_blank' className=' text-sky-500'><div>{i.displayLink}</div></a>
+                </div>
+              )
+            })
+          }
+        </div>
+      }
     </div>
   )
 }
