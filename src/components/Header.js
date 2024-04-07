@@ -10,7 +10,7 @@ const Header = ({ handleDarkMode }) => {
   const [show, setShow] = useState(0);
   const Search1 = async () => {
     try {
-      const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyAfp5jCnmuLZZNRDkG7V7CjKcSaaXSN13E&cx=a1af7bb50039b45a6&q=${username}`);
+      const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyABPe2zQIOKhkvUkPd7bwHZMKjEkFFKL0w&cx=a23cee8cff51c40ba&q=${username}`);
       if (response) {
         console.log(response.data.items)
         setData(response.data.items)
@@ -23,7 +23,7 @@ const Header = ({ handleDarkMode }) => {
   }
   const Search2 = async () => {
     try {
-      const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyAfp5jCnmuLZZNRDkG7V7CjKcSaaXSN13E&cx=a1af7bb50039b45a6&searchType=image&q=${username}`);
+      const response = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyABPe2zQIOKhkvUkPd7bwHZMKjEkFFKL0w&cx=a23cee8cff51c40ba&searchType=image&q=${username}`);
       if (response) {
         console.log(response.data.items)
         setData(response.data.items)
