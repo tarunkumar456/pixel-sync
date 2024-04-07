@@ -13,6 +13,30 @@
   }
 }
 
+.save{
+  background-color: blue;
+  border: none;
+  border-radius: 18px;
+  padding: 10px 12px 10px 12px;
+  margin-left: 80px;
+}
+.save:hover{
+  background-color: red;
+  cursor:pointer;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dark-mode body{
+  background-color: black;
+}
+.dark-mode h1{
+  color: white;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
